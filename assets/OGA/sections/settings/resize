@@ -1,0 +1,5 @@
+title=Resize
+description=Resize Partition
+icon=icons/gear.png
+exec=scripts/Resize.sh
+wrapper=true

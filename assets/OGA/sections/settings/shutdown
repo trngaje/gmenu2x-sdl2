@@ -1,5 +1,5 @@
-title=关机
-description=关闭电源
+title=Off
+description=Power Off
 icon=skin:icons/exit.png
 exec=scripts/shutdown.sh
 wrapper=false

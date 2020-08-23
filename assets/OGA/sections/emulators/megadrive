@@ -1,0 +1,9 @@
+title=MD
+description=MD Emulator
+icon=icons/picodrive.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=megadrive $1
+selectordir=/roms/megadrive
+selectorfilter=bin,BIN,gen,GEN,md,MD,sg,SG,smd,SMD,zip,ZIP,7z,7Z
+selectorscreens=/roms/megadrive/snap
+wrapper=true

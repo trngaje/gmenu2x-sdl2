@@ -1,0 +1,10 @@
+title=PSP
+description=PSP Emulator
+icon=icons/sony-psp-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=psp $1
+clock=1030975077
+selectordir=/roms/psp/
+selectorfilter=iso,ISO,cso,CSO,pbp,PBP
+selectorscreens=/roms/psp/snap
+wrapper=true

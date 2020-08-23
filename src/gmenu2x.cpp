@@ -72,6 +72,14 @@
 
 #include <sys/mman.h>
 
+#ifdef TARGET_OGA
+// added by trngaje
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alext.h>
+#include <alsa/asoundlib.h>
+#include <alsa/mixer.h>
+#endif
 const char *CARD_ROOT = "/mnt/"; //Note: Add a trailing /!
 const int CARD_ROOT_LEN = 5;
 
@@ -1731,6 +1739,28 @@ void GMenu2X::scanPath(string path, vector<string> *files) {
 	closedir(dirp);
 }
 
+#ifdef TARGET_OGA
+#define BATTERY_BUFFER_SIZE (128)
+
+static const char* BATTERY_STATUS_NAME = "/sys/class/power_supply/battery/status";
+static const char* BATTERY_CAPACITY_NAME = "/sys/class/power_supply/battery/capacity";
+
+typedef enum 
+{
+    Battery_Status_Unknown = 0,
+    Battery_Status_Discharging,
+    Battery_Status_Charging,
+    Battery_Status_Full,
+
+    Battery_Status_MAX = 0x7fffffff
+} go2_battery_status_t;
+
+typedef struct
+{
+    uint32_t level;
+    go2_battery_status_t status;
+} go2_battery_state_t;
+#endif
 unsigned short GMenu2X::getBatteryLevel() {
 	// if (batteryHandle<=0) return 6; //AC Power
 
@@ -1809,7 +1839,79 @@ unsigned short GMenu2X::getBatteryLevel() {
 	}
 	return battval;
 #endif
+#ifdef TARGET_OGA
+	// for odroid go advance
+    int fd;
+    void* result = 0;
+    char buffer[BATTERY_BUFFER_SIZE + 1];
+    go2_battery_state_t battery;
+	unsigned short battval=6;
 
+    memset(&battery, 0, sizeof(battery));
+
+
+	fd = open(BATTERY_STATUS_NAME, O_RDONLY);
+	if (fd > 0)
+	{
+		memset(buffer, 0, BATTERY_BUFFER_SIZE + 1);
+		ssize_t count = read(fd, buffer, BATTERY_BUFFER_SIZE);
+		if (count > 0)
+		{
+			//printf("BATT: buffer='%s'\n", buffer);
+
+			if (buffer[0] == 'D')
+			{
+				battery.status = Battery_Status_Discharging;
+			}
+			else if (buffer[0] == 'C')
+			{
+				battery.status = Battery_Status_Charging;
+			}
+			else if (buffer[0] == 'F')
+			{
+				battery.status = Battery_Status_Full;
+			}
+			else
+			{
+				battery.status = Battery_Status_Unknown;
+			}                
+		}
+
+		close(fd);
+	}
+
+	fd = open(BATTERY_CAPACITY_NAME, O_RDONLY);
+	if (fd > 0)
+	{
+		memset(buffer, 0, BATTERY_BUFFER_SIZE + 1);
+		ssize_t count = read(fd, buffer, BATTERY_BUFFER_SIZE);
+		if (count > 0)
+		{
+			battery.level = atoi(buffer);
+		}
+		else
+		{
+			battery.level = 0;
+		}
+		
+		if (battery.level == 100)
+			battval=6;
+		else if (battery.level > 85)
+			battval=5;
+		else if (battery.level > 65)
+			battval=4;
+		else if (battery.level > 45)
+			battval=3;
+		else if (battery.level > 25)
+			battval=2;
+		else if (battery.level > 0)
+			battval=1;
+		
+		return battval;
+		
+		close(fd);
+	}	
+#endif
 	return 6; //AC Power
 }
 
@@ -1905,6 +2007,37 @@ void GMenu2X::setGamma(int gamma) {
 }
 
 int GMenu2X::getVolume() {
+#ifdef TARGET_OGA
+	// odroid go advance
+    snd_mixer_t *handle;
+    snd_mixer_selem_id_t *sid;
+    const char *card = "default";
+    const char *selem_name = "Playback";
+
+    snd_mixer_open(&handle, 0);
+    snd_mixer_attach(handle, card);
+    snd_mixer_selem_register(handle, NULL, NULL);
+    snd_mixer_load(handle);
+
+    snd_mixer_selem_id_alloca(&sid);
+    snd_mixer_selem_id_set_index(sid, 0);
+    snd_mixer_selem_id_set_name(sid, selem_name);
+    
+    snd_mixer_elem_t* elem = snd_mixer_find_selem(handle, sid);
+
+    long min;
+    long max;
+    snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
+ 
+
+    //snd_mixer_selem_set_playback_volume_all(elem, value / 100.0f * max);
+    long volume;
+    snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_MONO, &volume);
+
+    snd_mixer_close(handle);
+
+    uint32_t result = volume / (float)max * 100.0f;
+#else 
 	int vol = -1;
 	unsigned long soundDev = open("/dev/mixer", O_RDONLY);
 	if (soundDev) {
@@ -1916,16 +2049,19 @@ int GMenu2X::getVolume() {
 		}
 	}
 	return vol;
+#endif
 }
 
 void GMenu2X::setVolume(int vol) {
 	vol = constrain(vol,0,100);
+#ifndef TARGET_OGA
 	unsigned long soundDev = open("/dev/mixer", O_RDWR);
 	if (soundDev) {
 		vol = (vol << 8) | vol;
 		ioctl(soundDev, SOUND_MIXER_WRITE_PCM, &vol);
 		close(soundDev);
 	}
+#endif
 }
 
 void GMenu2X::setVolumeScaler(int scale) {

@@ -1,0 +1,9 @@
+title=SFC
+description=SFC Emulator
+icon=icons/pocketsnes.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=snes $1
+selectordir=/roms/snes
+selectorfilter=smc,SMC,fig,FIG,bs,BS,st,ST,sfc,SFC,gd3,GD3,gd7,GD7,dx2,DX2,bsx,BSX,swc,SWC,zip,ZIP
+selectorscreens=/roms/snes/snap
+wrapper=true

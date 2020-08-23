@@ -1,0 +1,9 @@
+title=PC
+description=DosBox Emulator
+icon=icons/dosbox.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=pc $1
+selectordir=/roms/pc
+selectorfilter=com,COM,sh,SH,bat,BAT,exe,EXE,conf,CONF
+selectorscreens=/roms/pc/snap
+wrapper=true

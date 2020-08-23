@@ -1,0 +1,9 @@
+title=NDS
+description=nds Emulator
+icon=icons/nintendo-ds-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=nds $1
+selectordir=/roms/nds/
+selectorfilter=nds,NDS,zip,ZIP
+selectorscreens=/roms/nds/snap
+wrapper=true

@@ -1,0 +1,6 @@
+title=DiskInfo
+description=Disk Information
+icon=icons/info.png
+exec=scripts/Disk_info.sh
+clock=1936947967
+wrapper=true

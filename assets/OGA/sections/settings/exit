@@ -1,4 +1,4 @@
-title=退出
-description=退出到原ui
-icon=icons/supertux.png
-wrapper=false
+title=Exit
+description=Exit
+icon=icons/iconfinder_Exit.png
+clock=844645420

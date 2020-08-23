@@ -1,0 +1,11 @@
+title=ARCADE
+description=Arcade Emulator
+icon=icons/Arcade_Astrocity.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=arcade $1
+clock=16784976
+selectordir=/roms/arcade
+selectorfilter=zip,ZIP,7z,7Z
+selectorscreens=/roms/arcade/snap
+selectoraliases=arcade.txt
+wrapper=true

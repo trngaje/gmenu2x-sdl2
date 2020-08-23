@@ -61,6 +61,16 @@ int Selector::exec(int startSelection) {
 	writeTitle(link->getTitle(), &bg);
 	writeSubTitle(link->getDescription(), &bg);
 
+#ifdef TARGET_OGA
+	if (link->getSelectorBrowser()) {
+		gmenu2x->drawButton(&bg, "start", gmenu2x->tr["Exit"],
+		gmenu2x->drawButton(&bg, "a", gmenu2x->tr["Select a file"],
+		gmenu2x->drawButton(&bg, "b", gmenu2x->tr["Up one folder"], 5)));
+	} else {
+		gmenu2x->drawButton(&bg, "b", gmenu2x->tr["Exit"],
+		gmenu2x->drawButton(&bg, "a", gmenu2x->tr["Select a file"], 5));	
+	}
+#else	
 	if (link->getSelectorBrowser()) {
 		gmenu2x->drawButton(&bg, "start", gmenu2x->tr["Exit"],
 		gmenu2x->drawButton(&bg, "b", gmenu2x->tr["Select a file"],
@@ -68,8 +78,8 @@ int Selector::exec(int startSelection) {
 	} else {
 		gmenu2x->drawButton(&bg, "x", gmenu2x->tr["Exit"],
 		gmenu2x->drawButton(&bg, "b", gmenu2x->tr["Select a file"], 5));
-	}
-
+	}	
+#endif
 	Uint32 selTick = SDL_GetTicks(), curTick;
 	uint i, firstElement = 0, iY;
 
@@ -91,17 +101,19 @@ int Selector::exec(int startSelection) {
 		iY = selected-firstElement;
 		iY = 42+(iY*16);
 		if (selected<fl.size())
-			gmenu2x->s->box(1, iY, 309, 14, gmenu2x->skinConfColors[COLOR_SELECTION_BG]);
+			gmenu2x->s->box(1, iY, gmenu2x->resX - 11, 14, gmenu2x->skinConfColors[COLOR_SELECTION_BG]);
+
 
 		//Screenshot
 		if (selected-fl.dirCount()<screens.size() && screens[selected-fl.dirCount()]!="") {
 			curTick = SDL_GetTicks();
 			if (curTick-selTick>200)
-				gmenu2x->sc[screens[selected-fl.dirCount()]]->blitRight(gmenu2x->s, 311, 42, 160, 160, min((curTick-selTick-200)/3,255));
+				gmenu2x->sc[screens[selected-fl.dirCount()]]->blitScaled(gmenu2x->s, gmenu2x->resX - 9, 42, 320/*160*/, 240/*160*/);
+
 		}
 
 		//Files & Dirs
-		gmenu2x->s->setClipRect(0,41,311,179);
+		gmenu2x->s->setClipRect(0,41,gmenu2x->resX - 9,gmenu2x->resY - 61);
 		for (i=firstElement; i<fl.size() && i<firstElement+SELECTOR_ELEMENTS; i++) {
 			iY = i-firstElement;
 			if (fl.isDirectory(i)) {

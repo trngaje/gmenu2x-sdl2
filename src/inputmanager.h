@@ -84,7 +84,8 @@ public:
 	static const int MAPPING_TYPE_BUTTON = 0;
 	static const int MAPPING_TYPE_AXIS = 1;
 	static const int MAPPING_TYPE_KEYPRESS = 2;
-
+	static const int MAPPING_TYPE_HAT = 3;
+	
 	static const int SDL_WAKEUPEVENT = SDL_USEREVENT+1;
 
 	InputManager();

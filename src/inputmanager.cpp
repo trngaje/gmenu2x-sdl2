@@ -129,6 +129,13 @@ bool InputManager::readConfFile(const string &conffile) {
 				map.value = atoi(values[2].c_str());
 				map.treshold = atoi(values[3].c_str());
 				actions[action].maplist.push_back(map);
+			} else if (values[0] == "joystickhat" && values.size()==4) {
+				InputMap map;
+				map.type = InputManager::MAPPING_TYPE_HAT;
+				map.num = atoi(values[1].c_str());
+				map.value = atoi(values[2].c_str());
+				map.treshold = atoi(values[3].c_str());
+				actions[action].maplist.push_back(map);
 			} else if (values[0] == "keyboard") {
 				InputMap map;
 				map.type = InputManager::MAPPING_TYPE_KEYPRESS;
@@ -259,6 +266,14 @@ SDL_Event *InputManager::fakeEventForAction(int action) {
 			event->jaxis.axis = map.value;
 			event->jaxis.value = map.treshold;
 		break;
+		case InputManager::MAPPING_TYPE_HAT:
+			event->type = SDL_JOYHATMOTION;
+			event->jhat.type = SDL_JOYHATMOTION;
+			event->jhat.which = map.num;
+			event->jhat.hat = map.value;
+			event->jhat.value = map.treshold;
+			
+		break;
 		case InputManager::MAPPING_TYPE_KEYPRESS:
 			event->type = SDL_KEYDOWN;
 			// event->key.keysym.sym = (SDLKey)map.value;
@@ -322,6 +337,18 @@ bool InputManager::isActive(int action) {
 					if (map.treshold<0 && axyspos < map.treshold) return true;
 					if (map.treshold>0 && axyspos > map.treshold) return true;
 				}
+			break;
+			case InputManager::MAPPING_TYPE_HAT:
+				if (map.num < joysticks.size()) {
+/*
+#define 	SDL_HAT_CENTERED   0x00
+#define 	SDL_HAT_UP   0x01
+#define 	SDL_HAT_RIGHT   0x02
+#define 	SDL_HAT_DOWN   0x04
+#define 	SDL_HAT_LEFT   0x08
+*/
+					if (SDL_JoystickGetHat(joysticks[map.num], map.value) &  map.treshold) return true;
+				}					
 			break;
 			case InputManager::MAPPING_TYPE_KEYPRESS:
 				// Uint8 *keystate = SDL_GetKeyState(NULL);

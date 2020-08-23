@@ -1,0 +1,5 @@
+title=FileMgr
+description=File Manager
+icon=icons/folder.png
+exec=scripts/FileManager.sh
+wrapper=true

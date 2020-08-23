@@ -1,0 +1,6 @@
+title=Wifi
+description=Wifi setting
+icon=icons/gear.png
+exec=scripts/Wifi.sh
+clock=844645420
+wrapper=true

@@ -1,0 +1,11 @@
+title=MAME
+description=MAME Emulator
+icon=icons/mame.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=mame $1
+clock=16784976
+selectordir=/roms/mame
+selectorfilter=zip,ZIP,7z,7Z
+selectorscreens=/roms/mame/snap
+selectoraliases=arcade.txt
+wrapper=true

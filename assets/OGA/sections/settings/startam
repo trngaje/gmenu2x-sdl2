@@ -1,0 +1,5 @@
+title=StartAM
+description=Start Attract Mode
+icon=icons/supertux.png
+exec=scripts/START_AM.sh
+wrapper=true

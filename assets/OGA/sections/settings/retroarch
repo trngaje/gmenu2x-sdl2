@@ -1,0 +1,5 @@
+title=RA
+description=Retroarch 64bit setup
+icon=icons/gear.png
+exec=scripts/retroarch.sh
+wrapper=true

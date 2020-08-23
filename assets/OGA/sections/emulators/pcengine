@@ -1,0 +1,9 @@
+title=PCE
+description=pcengine Emulator
+icon=icons/hugo.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=pcengine $1
+selectordir=/roms/pcengine/
+selectorfilter=pce,PCE,bin,BIN,zip,ZIP,7z,7Z
+selectorscreens=/roms/pcengine/snap
+wrapper=true

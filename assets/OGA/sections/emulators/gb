@@ -1,8 +1,9 @@
-title=GB游戏
+title=GB
 description=GB Emulator
-icon=icons/ohboy.png
-exec=/home/cpi/apps/emulators/ohboy/ohboy
-selectordir=/home/cpi/games/GB/
-selectorfilter=gb,gbc,zip
-selectorscreens=images/GB
+icon=icons/nintendo-game-boy-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=gb $1
+selectordir=/roms/gb/
+selectorfilter=gb,GB,zip,ZIP,7z,7Z
+selectorscreens=/roms/gb/snap
 wrapper=true

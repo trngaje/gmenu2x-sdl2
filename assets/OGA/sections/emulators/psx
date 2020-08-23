@@ -1,0 +1,9 @@
+title=PS
+description=PS Emulator
+icon=icons/sony-playstation-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=psx $1
+selectordir=/roms/psx
+selectorfilter=bin,BIN,cue,CUE,img,IMG,mdf,MDF,pbp,PBP,toc,TOC,cbn,CBN,m3u,M3U,ccd,CCD,chd,CHD,zip,ZIP,7z,7Z,iso,ISO
+selectorscreens=/roms/psx/snap
+wrapper=true

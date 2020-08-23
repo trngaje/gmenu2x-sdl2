@@ -1,0 +1,9 @@
+title=GBC
+description=GBC Emulator
+icon=icons/nintendo-game-boy-color-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=gbc $1
+selectordir=/roms/gbc/
+selectorfilter=gbc,GBC,zip,ZIP,7z,7Z
+selectorscreens=/roms/gbc/snap
+wrapper=true

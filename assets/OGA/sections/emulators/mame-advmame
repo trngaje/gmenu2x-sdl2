@@ -1,0 +1,11 @@
+title=Adv
+description=AdvMAME Emulator
+icon=icons/mame.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=mame-advmame $1
+clock=16784976
+selectordir=/roms/mame-advmame
+selectorfilter=zip,ZIP,7z,7Z
+selectorscreens=/roms/mame-advmame/snap
+selectoraliases=arcade.txt
+wrapper=true

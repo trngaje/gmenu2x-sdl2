@@ -1,0 +1,11 @@
+title=4All
+description=Mame4all Emulator
+icon=icons/mame.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=mame-mame4all $1
+clock=16784976
+selectordir=/roms/mame-mame4all
+selectorfilter=zip,ZIP,7z,7Z
+selectorscreens=/roms/mame-mame4all/snap
+selectoraliases=arcade.txt
+wrapper=true

@@ -215,7 +215,26 @@ bool Surface::blit(SDL_Surface *destination, int x, int y, int w, int h, int a) 
 bool Surface::blit(Surface *destination, int x, int y, int w, int h, int a) {
 	return blit(destination->raw,x,y,w,h,a);
 }
+bool Surface::blitScaled(Surface *destination_Surface, int x, int y, int w, int h) {
+	SDL_Surface *destination=destination_Surface->raw;
+	
+	if (destination == NULL) return false;
+	
+	//keep aspect ratio
+	if (raw->w / w > raw->h / h){
+			h = w * raw->h / raw->w;
+	} else {
+			w = h * raw->w / raw->h;
+	}
 
+	SDL_Rect dest;
+	dest.x = x-w; // right align
+	dest.y = y;
+	dest.w = w;
+	dest.h = h;
+
+	return SDL_BlitScaled(raw, NULL, destination, &dest);
+}
 bool Surface::blitCenter(SDL_Surface *destination, int x, int y, int w, int h, int a) {
 	int oh, ow;
 	if (w==0) ow = halfW; else ow = min(halfW,w/2);

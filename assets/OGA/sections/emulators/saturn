@@ -1,0 +1,10 @@
+title=SATURN
+description=Sega Saturn Emulator
+icon=icons/sega-saturn-model-2-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=saturn $1
+clock=16784976
+selectordir=/roms/saturn
+selectorfilter=cue,CUE,chd,CHD,iso,ISO,zip,ZIP,7z,7Z
+selectorscreens=/roms/saturn/snap
+wrapper=true

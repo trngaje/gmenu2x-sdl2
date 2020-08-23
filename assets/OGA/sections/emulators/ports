@@ -1,0 +1,10 @@
+title=PORTS
+description=PORTS Emulator
+icon=icons/asciiportal.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=ports $1
+clock=1936551794
+selectordir=/roms/ports/
+selectorfilter=sh
+selectorscreens=/roms/ports/snap
+wrapper=true

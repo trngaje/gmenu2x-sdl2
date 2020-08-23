@@ -1,0 +1,11 @@
+title=DC
+description=DreamCast Emulator
+icon=icons/sega-dreamcast-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=dreamcast $1
+clock=16784976
+selectordir=/roms/dreamcast
+selectorfilter=zip,ZIP,7z,7Z
+selectorscreens=/roms/dramcast/snap
+selectoraliases=aliases.txt
+wrapper=true

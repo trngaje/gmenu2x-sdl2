@@ -1,0 +1,5 @@
+title=StartES
+description=Start Emulationstation
+icon=icons/supertux.png
+exec=scripts/START_ES.sh
+wrapper=true

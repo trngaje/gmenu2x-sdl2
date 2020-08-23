@@ -1,9 +1,9 @@
-title=GBA游戏
+title=GBA
 description=GBA Emulator
-icon=icons/regba.png
-exec=emuelecRunEmu.sh 
-params=$1 -Pgba --controllers="%CONTROLLERSCONFIG%"
-selectordir=/storage/roms/gba/
-selectorfilter=gba,zip
-selectorscreens=images/GBA
+icon=icons/nintendo-game-boy-advance-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=gba $1
+selectordir=/roms/gba/
+selectorfilter=gba,zip,GBA, ZIP
+selectorscreens=/roms/gba/snap
 wrapper=true

@@ -1,0 +1,9 @@
+title=GW
+description=GameandWatch Emulator
+icon=icons/Gaw.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=gameandwatch $1
+selectordir=/roms/gameandwatch/
+selectorfilter=mgw
+selectorscreens=/roms/gameandwatch/snap
+wrapper=true

@@ -1,0 +1,10 @@
+title=N64
+description=N64 Emulator
+icon=icons/nintendo-nintendo-64-icon.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=n64 $1
+clock=1702038106
+selectordir=/roms/n64/
+selectorfilter=z64,Z64,n64,N64,v64,V64,zip,ROM,zip
+selectorscreens=/roms/n64/snap
+wrapper=true

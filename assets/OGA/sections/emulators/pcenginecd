@@ -1,0 +1,10 @@
+title=PCECD
+description=PC Engine CD Emulator
+icon=icons/Pce_Cdrom.png
+exec=/home/odroid/runcommand/runcommand.sh
+params=pcenginecd $1
+clock=1936551794
+selectordir=/roms/pcenginecd/
+selectorfilter=pce,PCE,cue,CUE,ccd,CCD,iso,ISO,img,IMG,bin,BIN,chd,CHD,zip,ZIP,7z,7Z
+selectorscreens=/roms/pcenginecd/snap
+wrapper=true

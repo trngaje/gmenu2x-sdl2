@@ -26,7 +26,13 @@
 #include "utilities.h"
 #include "dialog.h"
 
+#ifdef TARGET_OGA
+// 480x320
+#define SELECTOR_ELEMENTS 16
+#else
+// 320x240
 #define SELECTOR_ELEMENTS 11
+#endif
 
 class LinkApp;
 class FileLister;

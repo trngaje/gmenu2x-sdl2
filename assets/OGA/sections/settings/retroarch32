@@ -1,0 +1,6 @@
+title=RA32
+description=Retroarch 32bit setup
+icon=icons/gear.png
+exec=scripts/retroarch32.sh
+clock=54494655
+wrapper=true

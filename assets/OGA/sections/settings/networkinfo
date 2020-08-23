@@ -1,0 +1,6 @@
+title=NetInfo
+description=Network Information
+icon=icons/info.png
+exec=scripts/Network Info.sh
+clock=844645420
+wrapper=true
